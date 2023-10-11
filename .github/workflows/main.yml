@@ -45,7 +45,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           username: ${{ secrets.VPS_SSH_USER }}
           source: docker-compose.prod.yml
-          target: ${{ env.VPS_PROJECT_PATH }}
+          target: ${{ vars.VPS_PROJECT_PATH }}
 
       - name: Run deploy on server
         uses: appleboy/ssh-action@v1.0.0
@@ -57,6 +57,6 @@ jobs:
           script: |
             docker login ghcr.io --username ${{ secrets.REGISTRY_USER }} \ 
             --password ${{ secrets.REGISTRY_TOKEN }}
-            docker-compose -f ${{ env.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot pull
-            docker-compose -f ${{ env.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot \ 
+            docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot pull
+            docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot \ 
             -e BOT_TOKEN=${{ secrets.BOT_TOKEN }} up -d
