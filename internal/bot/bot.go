@@ -33,6 +33,17 @@ func (b *Bot) Start() {
 		if umsg := update.Message; umsg != nil {
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
+			if umsg.Text == "/start" {
+				msg := tgbotapi.NewMessage(umsg.Chat.ID, "Welcome!")
+				msg.ReplyToMessageID = umsg.MessageID
+
+				_, err := b.tg.Send(msg)
+				if err != nil {
+					log.Printf("can't send message: %s", err)
+				}
+				return
+			}
+
 			if umsg.Text == "/ping" {
 				msg := tgbotapi.NewMessage(umsg.Chat.ID, "pong")
 				msg.ReplyToMessageID = umsg.MessageID
@@ -41,6 +52,7 @@ func (b *Bot) Start() {
 				if err != nil {
 					log.Printf("can't send message: %s", err)
 				}
+				return
 			}
 		}
 	}
