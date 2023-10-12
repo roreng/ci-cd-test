@@ -55,8 +55,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           username: ${{ secrets.VPS_SSH_USER }}
           script: |
-            docker login ghcr.io --username ${{ secrets.REGISTRY_USER }} \ 
-            --password ${{ secrets.REGISTRY_TOKEN }}
+            docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
             docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot pull
             docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot \ 
             -e BOT_TOKEN=${{ secrets.BOT_TOKEN }} up -d
