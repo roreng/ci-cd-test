@@ -24,4 +24,7 @@ jobs:
           debug: true
           script: |
             docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
-            docker compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot up -d
+            docker system prune -f
+            cd ${{ vars.VPS_PROJECT_PATH }}
+            docker compose -f ./docker-compose.prod.yml -p bot pull
+            docker compose -f ./docker-compose.prod.yml -p bot up -d
