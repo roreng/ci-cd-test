@@ -2,7 +2,7 @@ version: "3"
 
 services:
   bot:
-    image: ghcr.io/roreng/bot:latest
+    image: ghcr.io/roreng/ci-cd-test:latest
     restart: unless-stopped
     environment:
       BOT_TOKEN: ${BOT_TOKEN}
