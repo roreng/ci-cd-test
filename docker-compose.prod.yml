@@ -4,3 +4,5 @@ services:
   bot:
     image: ghcr.io/roreng/bot:latest
     restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
