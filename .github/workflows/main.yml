@@ -24,5 +24,4 @@ jobs:
           debug: true
           script: |
             docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
-            touch ${{ vars.VPS_PROJECT_PATH }}/testfiledir
-            touch testfile
+            docker ps
