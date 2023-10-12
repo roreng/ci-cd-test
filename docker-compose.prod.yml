@@ -3,6 +3,7 @@ version: "3"
 services:
   bot:
     image: ghcr.io/roreng/ci-cd-test:latest
+    container_name: "bot"
     restart: unless-stopped
     environment:
       BOT_TOKEN: ${BOT_TOKEN}
