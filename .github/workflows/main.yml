@@ -34,8 +34,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/bot:${{ github.event.release.tag_name }}
-            ghcr.io/${{ github.repository_owner }}/bot:latest
+            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
       
       - name: Copy docker-compose on sever
         uses: appleboy/scp-action@v0.1.3
@@ -58,7 +58,8 @@ jobs:
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           envs: BOT_TOKEN
+          debug: true
           script: |
             docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
             docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot pull
-            docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot up -d 
+            docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot up -d
