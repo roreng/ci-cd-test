@@ -63,3 +63,4 @@ jobs:
             docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
             docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot pull
             docker-compose -f ${{ vars.VPS_PROJECT_PATH }}/docker-compose.prod.yml -p bot up -d
+            ls
