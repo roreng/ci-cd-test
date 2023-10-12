@@ -2,5 +2,5 @@ version: "3"
 
 services:
   bot:
-    build: .
+    image: ghcr.io/roreng/bot:latest
     restart: unless-stopped
