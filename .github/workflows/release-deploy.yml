@@ -45,6 +45,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           username: ${{ secrets.VPS_SSH_USER }}
           rm: true
+          strip_components: 1
           source: deploy/docker-compose.prod.yml
           target: ${{ vars.VPS_PROJECT_PATH }}
   run: 
