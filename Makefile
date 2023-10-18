@@ -1,13 +1,13 @@
 .PHONY: build up down logs
 
 build:
-	docker-compose up --build -d --remove-orphans
+	docker compose -f ./deploy/docker-compose.yml up -d --remove-orphans
 
 up:
-	docker-compose up -d
+	docker compose -f ./deploy/docker-compose.yml up -d
 
 down:
-	docker-compose down
+	docker compose -f ./deploy/docker-compose.yml down
 
 logs:
-	docker-compose logs
+	docker compose -f ./deploy/docker-compose.yml logs
