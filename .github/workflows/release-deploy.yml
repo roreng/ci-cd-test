@@ -64,7 +64,8 @@ jobs:
           timeout: 2m
           envs: BOT_TOKEN
           script: |
-            docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_TOKEN }}
+            echo ${{ secrets.REGISTRY_TOKEN }} | docker login -u ${{ secrets.REGISTRY_USER }} \ 
+            --password-stdin ghcr.io
             docker system prune -f
             cd ${{ vars.VPS_PROJECT_PATH }}
             docker compose -f ./docker-compose.prod.yml -p bot pull
