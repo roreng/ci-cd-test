@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile
+          file: deploy/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
@@ -45,7 +45,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           username: ${{ secrets.VPS_SSH_USER }}
           rm: true
-          source: docker-compose.prod.yml
+          source: deploy/docker-compose.prod.yml
           target: ${{ vars.VPS_PROJECT_PATH }}
   run: 
     name: Run deploy on server
