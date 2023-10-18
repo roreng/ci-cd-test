@@ -43,8 +43,10 @@ func (b *Bot) Start() {
 				_, err := b.tg.Send(msg)
 				if err != nil {
 					log.Printf("can't send message: %s", err)
+					continue
 				}
-				return
+
+				continue
 			}
 
 			if umsg.Text == "/ping" {
@@ -54,27 +56,29 @@ func (b *Bot) Start() {
 				_, err := b.tg.Send(msg)
 				if err != nil {
 					log.Printf("can't send message: %s", err)
+					continue
 				}
-				return
+
+				continue
 			}
 
 			if strings.HasPrefix(umsg.Text, "/sum") {
 				args := strings.Split(umsg.Text, " ")
 				if len(args) != 3 {
 					log.Print("bad command format")
-					return
+					continue
 				}
 
 				first, err := strconv.ParseInt(args[1], 10, 64)
 				if err != nil {
 					log.Printf("bad first argument: %s", err)
-					return
+					continue
 				}
 
 				second, err := strconv.ParseInt(args[2], 10, 64)
 				if err != nil {
 					log.Printf("bad first argument: %s", err)
-					return
+					continue
 				}
 
 				sum := first + second
@@ -82,7 +86,13 @@ func (b *Bot) Start() {
 
 				msg := tgbotapi.NewMessage(umsg.Chat.ID, msgText)
 				msg.ReplyToMessageID = umsg.MessageID
-				return
+
+				_, err = b.tg.Send(msg)
+				if err != nil {
+					log.Printf("can't send message: %s", err)
+				}
+
+				continue
 			}
 		}
 	}
