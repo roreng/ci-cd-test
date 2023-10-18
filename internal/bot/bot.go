@@ -1,7 +1,10 @@
 package bot
 
 import (
+	"fmt"
 	"log"
+	"strconv"
+	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -52,6 +55,33 @@ func (b *Bot) Start() {
 				if err != nil {
 					log.Printf("can't send message: %s", err)
 				}
+				return
+			}
+
+			if strings.HasPrefix(umsg.Text, "/sum") {
+				args := strings.Split(umsg.Text, " ")
+				if len(args) != 3 {
+					log.Print("bad command format")
+					return
+				}
+
+				first, err := strconv.ParseInt(args[1], 10, 64)
+				if err != nil {
+					log.Printf("bad first argument: %s", err)
+					return
+				}
+
+				second, err := strconv.ParseInt(args[2], 10, 64)
+				if err != nil {
+					log.Printf("bad first argument: %s", err)
+					return
+				}
+
+				sum := first + second
+				msgText := fmt.Sprintf("(%v + %v) = %v", first, second, sum)
+
+				msg := tgbotapi.NewMessage(umsg.Chat.ID, msgText)
+				msg.ReplyToMessageID = umsg.MessageID
 				return
 			}
 		}
