@@ -45,7 +45,7 @@ func (b *Bot) Start() {
 			}
 
 			if umsg.Text == "/ping" {
-				msg := tgbotapi.NewMessage(umsg.Chat.ID, "pong")
+				msg := tgbotapi.NewMessage(umsg.Chat.ID, "🏓 pong")
 				msg.ReplyToMessageID = umsg.MessageID
 
 				_, err := b.tg.Send(msg)
